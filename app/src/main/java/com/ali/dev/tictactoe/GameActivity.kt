@@ -100,7 +100,8 @@ class GameActivity : ComponentActivity() {
     }
 
     private fun startGame() {
-        GameHolder.start()
+//        GameHolder.start()
+        GameHolder.startPlayWithAi()
     }
 
     @Composable
@@ -161,7 +162,7 @@ class GameActivity : ComponentActivity() {
                 modifier = Modifier
                     .padding(4.dp)
                     .fillMaxSize()
-                    .clickable(onClick = { GameHolder.makeMove(position) }),
+                    .clickable(onClick = { GameHolder.makeMoveWithAi(position) }),
                 shape = RoundedCornerShape(15.dp),
                 elevation = CardDefaults.cardElevation()
             ) {

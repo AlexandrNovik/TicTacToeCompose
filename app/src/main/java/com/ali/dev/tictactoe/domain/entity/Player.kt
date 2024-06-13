@@ -5,9 +5,9 @@ import com.ali.dev.tictactoe.domain.AI as GameAI
 
 sealed class Player {
     data object User : Player()
-    class AI(private val aiSeed: Seed) : Player() {
+    data object AI : Player() {
         private val ai = GameAI()
-        fun findBestMove(board: Board, seed: Seed = aiSeed) = ai.findBestPosition(board, seed)
+        fun findBestMove(board: Board, seed: Seed) = ai.findBestPosition(board, seed)
     }
 
 }

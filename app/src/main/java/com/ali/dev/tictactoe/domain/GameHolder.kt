@@ -11,6 +11,7 @@ object GameHolder {
     val move = mutableStateOf(Pair<Position, Seed>(Position(-1, -1), Seed.Empty))
     private val map = mutableMapOf<Position, Seed>()
     private var seed: Seed = Seed.O
+    private var gameWithAi: Game? = null
 
     fun start() {
         Thread {
@@ -31,9 +32,39 @@ object GameHolder {
         move.value = position to reversed
     }
 
+    fun startPlayWithAi() {
+        gameWithAi = Game()
+    }
+
+    fun makeMoveWithAi(position: Position) {
+        Thread {
+            if (map[position] != null) return@Thread
+            val reversed = seed.reverse()
+            seed = reversed
+            map[position] = reversed
+            move.value = position to reversed
+            Thread.sleep(300)
+            gameWithAi?.let { game ->
+                try {
+                    game.setMove(reversed, position)
+
+                    game.moveWithAI(reversed)?.let { aiMove ->
+                        map[aiMove.position] = aiMove.seed
+                        move.value = aiMove.position to aiMove.seed
+                        seed = aiMove.seed
+                    }
+                } catch (e: IllegalStateException) {
+                    println("Error: $e")
+                }
+            }
+        }.start()
+
+    }
+
     fun clear() {
         seed = Seed.O
         map.clear()
         move.value = Position(-1, -1) to Seed.Empty
+        gameWithAi = null
     }
 }
