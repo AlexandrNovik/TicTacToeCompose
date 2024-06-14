@@ -66,10 +66,16 @@ class MainActivity : ComponentActivity() {
             )
             Column(Modifier.padding(20.dp)) {
                 Button(
+                    onClick = { startGameWithAi() },
+                    modifier = Modifier.padding(buttonPadding)
+                ) {
+                    Text(text = "PLAY WITH AI", Modifier.padding(textPadding))
+                }
+                Button(
                     onClick = { startGame() },
                     modifier = Modifier.padding(buttonPadding)
                 ) {
-                    Text(text = "PLAY", Modifier.padding(textPadding))
+                    Text(text = " PLAY ALONE ", Modifier.padding(textPadding))
                 }
             }
         }
@@ -77,5 +83,9 @@ class MainActivity : ComponentActivity() {
 
     private fun startGame() {
         startActivity(Intent(this, GameActivity::class.java))
+    }
+
+    private fun startGameWithAi() {
+        startActivity(Intent(this, GameAIActivity::class.java))
     }
 }

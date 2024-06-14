@@ -26,6 +26,10 @@
             android:name=".GameActivity"
             android:exported="true"
             android:theme="@style/Theme.TicTacToe" />
+        <activity
+            android:name=".GameAIActivity"
+            android:exported="true"
+            android:theme="@style/Theme.TicTacToe" />
     </application>
 
 </manifest>

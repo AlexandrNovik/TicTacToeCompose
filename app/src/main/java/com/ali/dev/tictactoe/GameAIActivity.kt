@@ -41,12 +41,13 @@ import com.ali.dev.tictactoe.ui.theme.TicTacToeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-class GameActivity : ComponentActivity() {
+class GameAIActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         clearGame()
+        startGame()
         setContent {
             TicTacToeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
@@ -76,7 +77,10 @@ class GameActivity : ComponentActivity() {
         val buttonPadding = 10.dp
         val textPadding = 5.dp
         Button(
-            onClick = { clearGame() },
+            onClick = {
+                clearGame()
+                startGame()
+            },
             modifier = Modifier
                 .padding(buttonPadding)
                 .fillMaxWidth(0.6F)
@@ -122,7 +126,7 @@ class GameActivity : ComponentActivity() {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
-                    text = "Tic Tac Toe Alone",
+                    text = "Tic Tac Toe with AI",
                     fontWeight = FontWeight.Bold
                 )
             },
@@ -160,4 +164,9 @@ class GameActivity : ComponentActivity() {
     private fun clearGame() {
         GameHolder.clear()
     }
+
+    private fun startGame() {
+        GameHolder.startPlayWithAi()
+    }
+
 }

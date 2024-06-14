@@ -13,17 +13,6 @@ object GameHolder {
     private var seed: Seed = Seed.O
     private var gameWithAi: Game? = null
 
-    fun start() {
-        Thread {
-            clear()
-            Game().playAIWithAI {
-                map[it.position] = seed
-                move.value = it.position to it.seed
-                Thread.sleep(100)
-            }
-        }.start()
-    }
-
     fun makeMove(position: Position) {
         if (map[position] != null) return
         val reversed = seed.reverse()
